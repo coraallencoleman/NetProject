@@ -28,7 +28,8 @@ using PhyloNetworks
 using PhyloPlots
 besttrees = readMultiTopology("/Users/cora/git_repos/NetProject/data/Cui_etal/raxml_1183genes/besttrees.tre");
 plot(besttrees[1], :RCall, useEdgeLength=true, showEdgeNumber=true)
-raxmlCF = readTrees2CF(raxmltrees, CFfile="tableCF.txt");
+raxmlCF = readTrees2CF(besttrees, CFfile="tableCF.txt");
+#readTrees2CF(besttrees, whichQ="rand", numQ=10, CFfile="tableCF10.txt") #takes random sample of 10 to speed things up
 
 #SNaQ
 net0 = snaq!(besttrees[1],raxmlCF, hmax=0, filename="net0", seed=1234)
@@ -40,7 +41,27 @@ net0 = snaq!(besttrees[1],raxmlCF, hmax=0, filename="net0", seed=1234)
 using PhyloPlots
 ```
 
+### Metrics
+```julia
+Pkg.add("CPUTime")
+using CPUTime
+@time @CPUtime net0 = snaq!(besttrees[1],raxmlCF, hmax=0, filename="net0", seed=1234)
+```
+
+# Hard-wired Parsimony
+see https://github.com/crsl4/PhyloNetworks.jl/blob/master/docs/src/man/parsimony.md
+
+which data source works for parsimony?
+
+adapted from manual
+```juila
+score = parsimonySoftwired(net, species, traits)
+score = parsimonyGF(net,species,traits,:softwired)
+starttree = readTopology("(((English,German),Norwegian),Spanish);");
+net1 = maxParsimonyNet(starttree, dat, hmax=1, outgroup="Spanish", rootname="swadesh")
+```
 ## Questions for 11 27 18 Meeting with Cécile
-Should I use MrBayes or RAxML? 
+Should I use MrBayes or RAxML? Both?
+Or just keep it consistent?
 
 
