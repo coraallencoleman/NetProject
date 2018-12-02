@@ -23,9 +23,16 @@ starttree = besttrees[1]; #starting tree
 
 #Run Parsimony (outgroup from Claudia's paper)
 net1 = maxParsimonyNet(starttree, datsubset, outgroup="Xmonticolus") #TODO subset just for testing
+writeTopology(net1, "results/bestnets_Parsimony.tre")
 
 # Calculate parsimony score
 score = parsimonyGF(net,species,traits,:softwired)
+println(score)
+
+#calculate distance
+dist = hardwiredClusterDistance(goldNet, net1, false)
+print("hardwired cluster distance distance: ")
+println(dist)
 
 # FIGURES
 mkpath("../assets/figures")
