@@ -1,6 +1,15 @@
 *.csv
 data/*
+*.txt
+
 figures/*
 *figures/*
 *.svg
+*.png
+*.jpg
+*.jpeg
+
+
 *.out
+*.err
+*.log

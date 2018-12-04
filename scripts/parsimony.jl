@@ -15,14 +15,15 @@ df = vcat([CSV.read(f; header=false, delim=' ', datarow=2) for f in files])
 df = df[:,[:Column1, :Column12]]
 
 # Subset DF for testing
-datsubset = df[1:100]
+#datsubset = df[1:100]
 
 #read in RAxML starting tree
 besttrees = readMultiTopology("/Users/cora/git_repos/NetProject/data/Cui_etal/raxml_1183genes/besttrees.tre");
 starttree = besttrees[1]; #starting tree
 
 #Run Parsimony (outgroup from Claudia's paper)
-net1 = maxParsimonyNet(starttree, datsubset, outgroup="Xmonticolus") #TODO subset just for testing
+cd("/Users/cora/git_repos/NetProject/")
+net1 = maxParsimonyNet(starttree, df, outgroup="Xmonticolus")
 writeTopology(net1, "results/bestnets_Parsimony.tre")
 
 # Calculate parsimony score
@@ -30,13 +31,24 @@ score = parsimonyGF(net,species,traits,:softwired)
 println(score)
 
 #calculate distance
-dist = hardwiredClusterDistance(goldNet, net1, false)
-print("hardwired cluster distance distance: ")
+#How far are they from each other?
+cd("/Users/cora/git_repos/NetProject/data/Cui_etal/snaq")
+goldNet = readMultiTopology("bestnets_calibrated_cleanNames.tre")
+
+# cd("/Users/cora/git_repos/NetProject/")
+# parsimonyNet = readTopology("results/bestnets_Parsimony.tre")
+dist = hardwiredClusterDistance(goldNet[1], net1, false)
 println(dist)
 
 # FIGURES
-mkpath("../assets/figures")
+mkpath("../../..")
 R"svg(name('parsimony-fixed-net.svg'), width=4, height=4)"; # hide
 R"par"(mar = [0,0,0,0]);
 plot(net1, :R)
+R"dev.off"(); # hide
+
+mkpath("../../..")
+R"svg(name('gold-net.svg'), width=10, height=7)"; # hide
+R"par"(mar = [0,0,0,0]);
+plot(goldNet[1], :R)
 R"dev.off"(); # hide
