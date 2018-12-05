@@ -5,7 +5,7 @@
 #to move data to server
 #scp -r /Users/cora/git_repos/NetProject/data/ allencoleman@adhara.biostat.wisc.edu:/ua/allencoleman/Phylo/data
 
-#run with nohup julia0.7 parsimony.jl
+#run with nohup julia0.7 parsimony.jl > parsimony.out 2> parsimony.err
 
 cd("/ua/allencoleman/Phylo/results/")
 
@@ -16,19 +16,21 @@ using PhyloNetworks, RCall, PhyloPlots, CSV, DataFrames
 #df = data frame containing the species names in column 1, or in a column named species or taxon
 #read in all files in sequence directory
 files = filter(r".phy$", readdir("/ua/allencoleman/Phylo/data/data/Cui_etal/alignments_1183genes/"))
-df = vcat([CSV.read(f; header=false, delim=' ', datarow=2) for f in files])
-#trim bad space-only columns
+df = vcat([CSV.read(f; header=false, delim=' ', datarow=2) for f in files]) #TODO look for an external process_exited 
+
+#check order of taxa in file. 
+#trim empty space-only columns
 df = df[:,[:Column1, :Column12]]
 
 # Subset DF for testing
-#datsubset = df[1:100]
+#datsubset = df[1:10]
 
 #read in RAxML starting tree
 besttrees = readMultiTopology("/ua/allencoleman/Phylo/data/data/Cui_etal/raxml_1183genes/besttrees.tre");
 starttree = besttrees[1]; #starting tree
 
 #Run Parsimony (outgroup from Claudia's paper)
-net1 = maxParsimonyNet(starttree, df, outgroup="Xmonticolus")
+@time  net1 = maxParsimonyNet(starttree, df, outgroup="Xmonticolus") #Priapella?
 writeTopology(net1, "bestnets_Parsimony.tre")
 
 # Calculate parsimony score
