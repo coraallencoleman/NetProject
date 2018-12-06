@@ -1,4 +1,4 @@
-# Can We Improve the Speed of Likelihood-Based Phylogenetic Network Methods without Sacrificing Accuracy?
+# Can We Improve the Speed of Phylogenetic Network Methods without Sacrificing Accuracy?
 Computational Networks Course (BMI 826) Semester Project (University of Wisconsin-Madison)
 Specifically, can we remove the complex and time-consuming incomplete lineage sorting piece of the model?
 
@@ -39,32 +39,7 @@ net0 = snaq!(besttrees[1],raxmlCF, hmax=0, filename="net0", seed=1234)
 ## Softwired Parsimony
 see https://github.com/crsl4/PhyloNetworks.jl/blob/master/docs/src/man/parsimony.md
 
-see parsimony.jl script
-results from running subset of 100
-optimization of topology using:
- hmax = 1,
- max number of failed proposals = 75.
-rootname for files: mp
-
-elapsed time: 792.379605489 seconds
-MaxNet is (Xmonticolus,(Xsignum,((Xalvarezi,Xmayae),(((Priapella,Psjonesii),(Xclemenciae_F2,Xhellerii)),(((Xmilleri,(Xandersi,((Xxiphidium,Xevelynae),(Xvariatus,(Xmeyeri,(Xgordoni,Xcouchianus)))))),Xmaculatus),(((((Xmalinche_CHIC2,Xnigrensis),Xmultilineatus),((Xpygmaeus,Xcontinens),Xcortezi)),(Xnezahuacoyotl,Xmontezumae)),(Xbirchmanni_GARC,Xbirref)))))));
-with softwired parsimony score 26.0
-PhyloNetworks.HybridNetwork, Rooted Network
-52 edges
-53 nodes: 27 tips, 0 hybrid nodes, 26 internal tree nodes.
-tip labels: Xmilleri, Xandersi, Xxiphidium, Xevelynae, ...
-(Xmonticolus,(Xsignum,((Xalvarezi,Xmayae),(((Priapella,Psjonesii),(Xclemenciae_F2,Xhellerii)),(((Xmilleri,(Xandersi,((Xxiphidium,Xevelynae),(Xvariatus,(Xmeyeri,(Xgordoni,Xcouchianus)))))),Xmaculatus),(((((Xmalinche_CHIC2,Xnigrensis),Xmultilineatus),((Xpygmaeus,Xcontinens),Xcortezi)),(Xnezahuacoyotl,Xmontezumae)),(Xbirchmanni_GARC,Xbirref)))))));
-
-Estimated full time: 70.18 hours
-
-julia> 31941/100
-319.41
-julia> 319*792
-252648
-julia> 252648/60
-4210.8
-julia> 4210.8/60
-70.18
+see cat_phy.jl and parsimony.jl script
    
 # Notes from 11 28 18 Meeting with Cécile
 
