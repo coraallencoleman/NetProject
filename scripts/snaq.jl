@@ -3,8 +3,8 @@
 #scp /Users/cora/git_repos/NetProject/scripts/snaq.jl allencoleman@adhara.biostat.wisc.edu:/ua/allencoleman/Phylo/scripts
 #move data to server
 #scp -r /Users/cora/git_repos/NetProject/data/ allencoleman@adhara.biostat.wisc.edu:/ua/allencoleman/Phylo/data
-#open julia with julia0.7
-#run with nohup julia0.7 snaq.jl > snaq.out 2> snaq.err
+#open julia with julia0.6
+#run with nohup julia0.6 snaq.jl > snaq.out 2> snaq.err in scripts/
 
 Pkg.add("PhyloNetworks")
 Pkg.add("PhyloPlots")
