@@ -4,12 +4,12 @@
 #move data to server
 #scp -r /Users/cora/git_repos/NetProject/data/ allencoleman@adhara.biostat.wisc.edu:/ua/allencoleman/Phylo/data
 #open julia with julia0.6
-#run with nohup julia0.6 snaq.jl > snaq.out 2> snaq.err in scripts/
+#run in scripts/ with: nohup julia0.6 snaq.jl > snaq.out 2> snaq.err 
 
 Pkg.add("PhyloNetworks")
-Pkg.add("PhyloPlots")
+#kg.add("PhyloPlots") #doesnt work on server bc RCall
 using PhyloNetworks
-using PhyloPlots
+#using PhyloPlots
 cd("/ua/allencoleman/Phylo/results/")
 
 besttrees = readMultiTopology("/ua/allencoleman/Phylo/data/data/Cui_etal/raxml_1183genes/besttrees.tre");
