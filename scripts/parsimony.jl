@@ -42,9 +42,17 @@ starttree = besttrees[2]; #starting tree has 1 reticulation
 cd("/ua/allencoleman/Phylo/results/")
 #Run Parsimony (outgroup from Claudia's paper)
 #rooted with the southern swordtails outgroup clade (SS).
-#TODO start with network with one reticulation 
 
-for i in 1:1
+for i in 1:10
     @time  net1 = maxParsimonyNet(starttree, hmax = i, Nfail = 1000, pruned_df, outgroup="Xhellerii") #southern swordfishes
     writeTopology(net1, @sprintf("bestnets_Parsimony%02.d.tre", i))
 end
+
+#TODO start with random network?
+
+#create random network
+
+#TODO id edge number with 
+#show edge number = true, 
+#then root on edge!(network, #). 
+#Then do distance calc on this modified version.
