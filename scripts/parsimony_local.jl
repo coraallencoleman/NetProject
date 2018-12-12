@@ -18,13 +18,13 @@ df = df[:,[:Column1, :Column12]]
 #datsubset = df[1:100]
 
 #read in RAxML starting tree
-besttrees = readMultiTopology("/Users/cora/git_repos/NetProject/data/Cui_etal/raxml_1183genes/besttrees.tre");
+besttrees = readMultiTopology("/Users/cora/git_repos/NetProject/data/Cui_etal/snaq/bestnets_calibrated_cleanNames.tre");
 starttree = besttrees[1]; #starting tree
 
 #Run Parsimony (outgroup from Claudia's paper)
 cd("/Users/cora/git_repos/NetProject/")
-net1 = maxParsimonyNet(starttree, df, outgroup="Xmonticolus")
-writeTopology(net1, "results/bestnets_Parsimony.tre")
+net1 = maxParsimonyNet(starttree, hmax = 2, pruned_df, outgroup="Xhellerii")
+writeTopology(net1, "results/bestnets_Parsimony2.tre")
 
 # Calculate parsimony score
 score = parsimonyGF(net,species,traits,:softwired)
@@ -36,7 +36,7 @@ cd("/Users/cora/git_repos/NetProject/data/Cui_etal/snaq")
 goldNet = readMultiTopology("bestnets_calibrated_cleanNames.tre")
 
 # cd("/Users/cora/git_repos/NetProject/")
-# parsimonyNet = readTopology("results/bestnets_Parsimony.tre")
+parsimonyNet = readTopology("results/bestnets_Parsimony.tre")
 dist = hardwiredClusterDistance(goldNet[1], net1, false)
 println(dist)
 

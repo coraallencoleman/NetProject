@@ -4,8 +4,10 @@
 #scp /Users/cora/git_repos/NetProject/scripts/parsimony.jl allencoleman@adhara.biostat.wisc.edu:/ua/allencoleman/Phylo/scripts
 #to move data to server
 #scp /Users/cora/git_repos/NetProject/data/Cui_etal/alignments_1183genes/full.phy allencoleman@adhara.biostat.wisc.edu:/ua/allencoleman/Phylo/data/data/Cui_etal/alignments_1183genes/
-#scp allencoleman@adhara.biostat.wisc.edu:/ua/allencoleman/Phylo/results/* /Users/cora/git_repos/NetProject/results/parsimony/
+#scp allencoleman@adhara.biostat.wisc.edu:/ua/allencoleman/Phylo/scripts/parsimony* /Users/cora/git_repos/NetProject/results/parsimony/error/
 #run with nohup julia0.6 parsimony.jl > parsimony.out 2> parsimony.err
+
+
 
 cd("/ua/allencoleman/Phylo/data/data/Cui_etal/alignments_1183genes/")
 
@@ -14,7 +16,7 @@ using PhyloNetworks, CSV, DataFrames #,RCall, PhyloPlots
 
 # Read in Sequence Data for maxParsimonyNet(T::HybridNetwork, df::DataFrame)
 #df = CSV.read("full.phy", delim = r"\s+")
-df = readdlm("full.phy") 
+df = readdlm("full.phy", skipstart=1) #TODO skip first line
 df = convert(DataFrame, df)
 
 #read in RAxML starting tree

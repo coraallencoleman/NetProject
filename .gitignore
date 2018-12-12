@@ -1,6 +1,7 @@
 *.csv
 data/*
 *.txt
+*.tre
 
 figures/*
 *figures/*

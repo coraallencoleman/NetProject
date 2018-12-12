@@ -1,0 +1,18 @@
+# Calculate parsimony score
+score = parsimonyGF(net1,species,traits,:softwired) #TODO fix
+println(score)
+
+#calculate distance
+#How far are they from each other?
+goldNet = readMultiTopology("/ua/allencoleman/Phylo/data/data/Cui_etal/snaq/bestnets_calibrated_cleanNames.tre")
+
+# parsimonyNet = readTopology("results/bestnets_Parsimony.tre")
+dist = hardwiredClusterDistance(goldNet[1], net1, false)
+println(dist)
+
+# # FIGURES
+# cd("/ua/allencoleman/Phylo/results/")
+# R"svg(name('parsimony-fixed-net.svg'), width=4, height=4)"; # hide
+# R"par"(mar = [0,0,0,0]);
+# plot(net1, :R)
+# R"dev.off"(); # hide
