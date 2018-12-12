@@ -37,38 +37,14 @@ pruned_df = deleterows!(pruned_df, 19)
 
 #read in RAxML starting tree
 besttrees = readMultiTopology("/ua/allencoleman/Phylo/data/data/Cui_etal/snaq/bestnets_calibrated_cleanNames.tre");
-starttree = besttrees[1]; #starting tree
+starttree = besttrees[2]; #starting tree has 1 reticulation
 
+cd("/ua/allencoleman/Phylo/results/")
 #Run Parsimony (outgroup from Claudia's paper)
 #rooted with the southern swordtails outgroup clade (SS).
-@time  net1 = maxParsimonyNet(starttree, hmax = 1, pruned_df, outgroup="Xhellerii") #southern swordfishes
-cd("/ua/allencoleman/Phylo/results/")
-writeTopology(net1, "bestnets_Parsimony1.tre")
+#TODO start with network with one reticulation 
 
-@time  net3 = maxParsimonyNet(starttree, hmax = 3, pruned_df, outgroup="Xhellerii") #southern swordfishes
-cd("/ua/allencoleman/Phylo/results/")
-writeTopology(net1, "bestnets_Parsimony3.tre")
-
-@time  net4 = maxParsimonyNet(starttree, hmax = 4, pruned_df, outgroup="Xhellerii") #southern swordfishes
-cd("/ua/allencoleman/Phylo/results/")
-writeTopology(net1, "bestnets_Parsimony4.tre")
-
-@time  net5 = maxParsimonyNet(starttree, hmax = 5, pruned_df, outgroup="Xhellerii") #southern swordfishes
-cd("/ua/allencoleman/Phylo/results/")
-writeTopology(net1, "bestnets_Parsimony5.tre")
-
-@time  net6 = maxParsimonyNet(starttree, hmax = 6, pruned_df, outgroup="Xhellerii") #southern swordfishes
-cd("/ua/allencoleman/Phylo/results/")
-writeTopology(net1, "bestnets_Parsimony6.tre")
-
-@time  net7 = maxParsimonyNet(starttree, hmax = 7, pruned_df, outgroup="Xhellerii") #southern swordfishes
-cd("/ua/allencoleman/Phylo/results/")
-writeTopology(net1, "bestnets_Parsimony7.tre")
-
-@time  net8 = maxParsimonyNet(starttree, hmax = 8, pruned_df, outgroup="Xhellerii") #southern swordfishes
-cd("/ua/allencoleman/Phylo/results/")
-writeTopology(net1, "bestnets_Parsimony8.tre")
-
-@time  net9 = maxParsimonyNet(starttree, hmax = 9, pruned_df, outgroup="Xhellerii") #southern swordfishes
-cd("/ua/allencoleman/Phylo/results/")
-writeTopology(net1, "bestnets_Parsimony9.tre")
+for i in 1:1
+    @time  net1 = maxParsimonyNet(starttree, hmax = i, Nfail = 1000, pruned_df, outgroup="Xhellerii") #southern swordfishes
+    writeTopology(net1, @sprintf("bestnets_Parsimony%02.d.tre", i))
+end
