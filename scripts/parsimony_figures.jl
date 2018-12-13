@@ -16,6 +16,11 @@ cd("/Users/cora/git_repos/NetProject/")
 goldNets = readMultiTopology("/Users/cora/git_repos/NetProject/data/Cui_etal/snaq/bestnets_calibrated_cleanNames.tre")
 goldNet = goldNets[3] #with hmax = 2
 
+#TODO create random network
+#switch tips to create random network
+writeTopology(goldNet, "randomNetwork.tre")
+#create random network
+
 #Read in Parsimony Results, 
 parsimonyNet01 = readTopology("results/both/bestnets_Parsimony01.tre")
 parsimonyNet02 = readTopology("results/both/bestnets_Parsimony02.tre")
