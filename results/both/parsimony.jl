@@ -7,8 +7,8 @@
 #run with nohup julia0.6 parsimony.jl > parsimony.out 2> parsimony.err
 
 #TO MOVE BACK
-#scp allencoleman@adhara.biostat.wisc.edu:/ua/allencoleman/Phylo/scripts/* /Users/cora/git_repos/NetProject/results/both/
-#scp allencoleman@adhara.biostat.wisc.edu:/ua/allencoleman/Phylo/results/* /Users/cora/git_repos/NetProject/results/both/
+#scp allencoleman@adhara.biostat.wisc.edu:/ua/allencoleman/Phylo/scripts/parsimony* /Users/cora/git_repos/NetProject/results/parsimony/error/
+#scp allencoleman@adhara.biostat.wisc.edu:/ua/allencoleman/Phylo/results/* /Users/cora/git_repos/NetProject/results/
 
 cd("/ua/allencoleman/Phylo/")
 
@@ -49,11 +49,5 @@ for i in 1:10
 end
 
 #TODO start with random network?
-#switch tips to create random network
-randTips!(goldNet) #TODO change to starttree, look up method
-#create random network
 
-#TODO id edge number with 
-#show edge number = true, 
-#then root on edge!(network, #). 
-#Then do distance calc on this modified version.
+#create random network
