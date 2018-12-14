@@ -18,7 +18,6 @@ raxmlCF = readTrees2CF(besttrees, CFfile="tableCF.txt"); #creates table, slow
 # readTrees2CF(besttrees, whichQ="rand", numQ=10, CFfile="tableCF10.txt") #takes random sample of 10 to speed things up
 
 # #run SNaQ
-
 @time net0 = snaq!(besttrees[1],raxmlCF, hmax=0, filename="net0", seed=1234)
 
 writeTopology(net0, "bestnet_RAxMLSNaQ.tre")

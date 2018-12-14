@@ -14,12 +14,7 @@ cd("/Users/cora/git_repos/NetProject/")
 # Calculate Distance
 #How far is this network from the gold standard network?
 goldNets = readMultiTopology("/Users/cora/git_repos/NetProject/data/Cui_etal/snaq/bestnets_calibrated_cleanNames.tre")
-goldNet = goldNets[3] #with hmax = 2
-
-#TODO create random network
-#switch tips to create random network
-writeTopology(goldNet, "randomNetwork.tre")
-#create random network
+goldNet = goldNets[3] #with hmax = 3
 
 #Read in Parsimony Results, 
 parsimonyNet01 = readTopology("results/both/bestnets_Parsimony01.tre")
@@ -140,3 +135,8 @@ R"dev.off"(); # hide
 # Calculate parsimony score
 # score = parsimonyGF(net1,species,traits,:softwired) #TODO fix
 # println(score)
+
+#TODO create random network
+#switch tips to create random network
+writeTopology(goldNet, "randomNetwork.tre")
+#create random network
